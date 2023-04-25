@@ -77,9 +77,8 @@ namespace Pulsar4X.ECSLib
         public static string CreateHash(string password)
         {
             // Generate a random salt
-            RNGCryptoServiceProvider csprng = new RNGCryptoServiceProvider();
             byte[] salt = new byte[SALT_BYTE_SIZE];
-            csprng.GetBytes(salt);
+            RandomNumberGenerator.Create().GetBytes(salt);
 
             // Hash the password and encode the parameters
             byte[] hash = PBKDF2(password, salt, PBKDF2_ITERATIONS, HASH_BYTE_SIZE);
